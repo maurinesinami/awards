@@ -20,3 +20,8 @@ def new_profile(request,id):
     else:
         form = NewProfileForm()
     return render(request, 'new-profile.html', {"form":form,"user":user})
+def profile(request):
+    current_user = request.user
+    profile = Profile.objects.get(user=current_user)
+    # posts=Image.objects.filter(profile_id=current_user.id)
+    return render(request, 'profile-page.html',{"profile":profile})
