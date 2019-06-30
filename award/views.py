@@ -7,6 +7,21 @@ from .forms import NewProfileForm
 @login_required(login_url='/accounts/login/')
 def welcome(request):
     return render(request,'welcome.html')
+    @login_required(login_url='/accounts/login/')
+def new_post(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.profile=current_user
+            post.save()
+        return redirect('welcome')
+
+    else:
+        form = NewPostForm()
+    return render(request, 'new-post.html', {"form": form})
+
 @login_required(login_url='/accounts/login/')      
 def new_profile(request,id):
     user = request.user
