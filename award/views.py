@@ -6,3 +6,16 @@ from django.contrib.auth.models import User
 @login_required(login_url='/accounts/login/')
 def welcome(request):
     return render(request,'welcome.html')
+@login_required(login_url='/accounts/login/')      
+def new_profile(request,id):
+    user = request.user
+    if request.method == 'POST':
+        form = NewProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = user
+            profile.save()
+        return redirect('profile')
+    else:
+        form = NewProfileForm()
+    return render(request, 'new-profile.html', {"form":form,"user":user})
