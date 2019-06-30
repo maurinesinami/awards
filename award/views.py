@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http  import HttpResponse,Http404
 from django.contrib.auth.decorators import login_required
-from . models import  Profile
+from . models import  Profile,Image
 from django.contrib.auth.models import User
 from .forms import NewProfileForm,NewPostForm
 @login_required(login_url='/accounts/login/')
 def welcome(request):
     return render(request,'welcome.html')
-    @login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def new_post(request):
     current_user = request.user
     if request.method == 'POST':
@@ -38,5 +38,5 @@ def new_profile(request,id):
 def profile(request):
     current_user = request.user
     profile = Profile.objects.get(user=current_user)
-    # posts=Image.objects.filter(profile_id=current_user.id)
-    return render(request, 'profile-page.html',{"profile":profile})
+    posts=Image.objects.filter(profile_id=current_user.id)
+    return render(request, 'profile-page.html',{"profile":profile,"posts":posts})

@@ -1,6 +1,10 @@
-from .models import Profile
+from .models import Profile,Image
 from django import forms
 class NewProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['user']
+class NewPostForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        exclude = ['']        
