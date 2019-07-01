@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http  import HttpResponse,Http404
 from django.contrib.auth.decorators import login_required
-from . models import  Profile,Image
+from . models import  Profile,Image,Rating
 from django.contrib.auth.models import User
-from .forms import NewProfileForm,NewPostForm
+from .forms import NewProfileForm,NewPostForm,Rate
 @login_required(login_url='/accounts/login/')
 def welcome(request):
-    return render(request,'welcome.html')
+    images = Image.objects.all()
+    profile = Profile.objects.all()
+    return render(request,'index.html',{"images":images,"profile":profile})
 @login_required(login_url='/accounts/login/')
 def new_post(request):
     current_user = request.user

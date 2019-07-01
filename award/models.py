@@ -12,7 +12,8 @@ class Profile(models.Model):
 class Image(models.Model):
     image = models.ImageField(upload_to = 'landingpage/')
     image_name = models.CharField(max_length=30)
-    image_caption = models.CharField(max_length=50)
+    image_description = models.CharField(max_length=50)
+    live_link = models.CharField(max_length=30)
     profile = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     
     def __str__(self):
@@ -33,4 +34,22 @@ class Image(models.Model):
         self.delete()
 
     
-     
+class Rating(models.Model):
+  RATINGS = (
+      (1, '1'),
+      (2, '2'),
+      (3, '3'),
+      (4, '4'),
+      (5, '5'),
+      (6,'6'),
+      (7,'7'),
+      (8,'8'),
+      (9,'9'),
+      (10,'10')
+  )
+  image = models.ForeignKey(Image)
+  user = models.ForeignKey(User)
+  usability_rating = models.IntegerField(default=0, choices=RATINGS, null=True)
+  design_rating = models.IntegerField(default=0, choices=RATINGS, null=True)
+  content_rating = models.IntegerField(default=0, choices=RATINGS, null=True)
+  review = models.CharField(max_length=200)

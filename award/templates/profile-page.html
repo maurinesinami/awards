@@ -1,8 +1,10 @@
-{%extends 'base.html'%}
-{%load static%}
+{% extends 'base.html' %}
+{% load bootstrap4 %}
 {% block content %}
+{% load staticfiles %}
 {{block.super}}
 <br><br><br>
+
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-sm-12">
@@ -14,15 +16,17 @@
           <b><p style="font-family: 'Metal Mania', cursive;">{{user.username}}</p></b>
         </div>
         <div class="button">
-          <a href="{%url 'new-profile' user.id%}" style="border:1px solid lightgrey;border-radius:2px;color:black;text-decoration:none"><span style="font-family: 'Metal Mania', cursive;"> profile</a></span>
+          <a href="{%url 'new-profile' user.id%}" style="border:1px solid lightgrey;border-radius:2px;color:black;text-decoration:none"><span style="font-family: 'Metal Mania', cursive;"> Edit</a></span>
         </div>
         <div class="cog" style="font-family: 'Metal Mania', cursive;">
           <i class="fa fa-cog"></i>
-          FOLLOWERS:0    FOLLOWING:0
+    
         </div>
       </div><br><br>
       <h2 style="font-family: 'Metal Mania', cursive;">Bio</h2>
     <p style="font-family: 'Metal Mania', cursive;">{{profile.bio}}</p>
+    <h2  style="font-family: 'Metal Mania', cursive;">Contact</h2>
+    <p>{{profile.contact}}</p>
       </div>
     </div>
     <br><hr>

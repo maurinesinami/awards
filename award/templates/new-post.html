@@ -1,43 +1,36 @@
-{%extends 'base.html'%}
-{%load static%}
-{% block content %}
-{{block.super}}
-<br><br><br>
+{% load bootstrap4 %} {% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>New Post</title>
+  {{form.media}}
+
+{% block styles %} {% bootstrap_css %}
+  <link rel="stylesheet" href="{% static 'css/award.css' %}"> {% endblock %}
+
+</head>
+
+
+<body>
   <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-sm-12">
-        <img src="{{profile.profile_photo.url}}" alt="" width="150px" height="150px" class="rounded-circle">
-      </div>
-      <div class="col-md-6 col-sm-12">
-      <div class="">
-        <div class="">
-          <b><p style="font-family: 'Metal Mania', cursive;">{{user.username}}</p></b>
-        </div>
-        <div class="button">
-          <a href="{%url 'new-profile' user.id%}" style="border:1px solid lightgrey;border-radius:2px;color:black;text-decoration:none"><span style="font-family: 'Metal Mania', cursive;"> profile</a></span>
-        </div>
-        <div class="cog" style="font-family: 'Metal Mania', cursive;">
-          <i class="fa fa-cog"></i>
-    
-        </div>
-      </div><br><br>
-      <h2 style="font-family: 'Metal Mania', cursive;">Bio</h2>
-    <p style="font-family: 'Metal Mania', cursive;">{{profile.bio}}</p>
-    <p>{{profile.contact}}</p>
-      </div>
-    </div>
-    <br><hr>
-    <div class="row">
-      {%for post in posts%}
-        
-          <div class="card" style="width:18rem">
-            <img src="{{post.image.url}}" alt="" width="100%">
-          </div>
+    <h1 class="text-center" style="font-family:'Lobster Two',sans-serif">Instaclone</h1>
+    <form  action="{%url 'new-post'%}" method="post" enctype="multipart/form-data">
+      {%csrf_token%}
 
-
-      {%endfor%}
-    </div>
+      {% bootstrap_form form %}
+      <input type="submit" class="btn btn-success btn-lg" value="Post">
+    </form>
   </div>
 
 
-{% endblock %}
+   {% block scripts %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  {% bootstrap_javascript %} {% endblock %}
+
+</body>
+
+</html>

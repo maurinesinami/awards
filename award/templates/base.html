@@ -1,4 +1,5 @@
 {% load bootstrap4 %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +17,12 @@
   {% endblock %}
 </head>
 <body>
+   
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
         {% include "navbar.html" %}
+        {% block content %}  {%endblock%}
+  
     {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  {% bootstrap_javascript %}

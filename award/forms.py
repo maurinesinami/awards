@@ -1,4 +1,4 @@
-from .models import Profile,Image
+from .models import Profile,Image,Rating
 from django import forms
 class NewProfileForm(forms.ModelForm):
     class Meta:
@@ -8,3 +8,7 @@ class NewPostForm(forms.ModelForm):
     class Meta:
         model = Image
         exclude = ['']        
+class Rate(forms.ModelForm):
+    class Meta:
+        model = Rating
+        exclude = ['']
