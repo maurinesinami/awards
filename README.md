@@ -39,6 +39,6 @@ NO known Bugs.
 
 
 ## Support and contact details
-Please reach out to me at 'saudababs00@gmail.com' for any queries concerning this or any other code.
+Please reach out to me at 'maurine.sinami@gmail.com' for any queries concerning this or any other code.
 ### License
 MIT LICENSE [Maurine Sinami][2019]
