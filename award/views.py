@@ -8,7 +8,8 @@ from .forms import NewProfileForm,NewPostForm,Rate
 def welcome(request):
     images = Image.objects.all()
     profile = Profile.objects.all()
-    return render(request,'index.html',{"images":images,"profile":profile})
+    ratings = Rating.objects.all()
+    return render(request,'index.html',{"images":images,"profile":profile ,"ratings":ratings})
 @login_required(login_url='/accounts/login/')
 def new_post(request):
     current_user = request.user
@@ -41,4 +42,19 @@ def profile(request):
     current_user = request.user
     profile = Profile.objects.get(user=current_user)
     posts=Image.objects.filter(profile_id=current_user.id)
-    return render(request, 'profile-page.html',{"profile":profile,"posts":posts})
+    ratings = Rating.objects.filter(profile_id=current_user_id)
+    return render(request, 'profile-page.html',{"profile":profile,"posts":posts,"ratings":ratings})
+def ratings(request,id):
+    current_user = request.user
+    profile = Profile.objects.get(user=current_user)
+    if request.method == 'POST':
+        form = Rate(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.profile=current_user
+            post.save()
+        return redirect('welcome')
+
+    else:
+        form = Rate()
+    return render(request, 'ratings.html', {"form": form})
